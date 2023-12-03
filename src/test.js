@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { FcDeleteDatabase } from "react-icons/fc";
-import { FaEdit,FaSearch } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { IoIosSave } from "react-icons/io";
 import "./App.css";
 
@@ -15,6 +15,7 @@ const AdminDashboard = () => {
   const usersPerPage = 10;
 
   useEffect(() => {
+    // Fetch data from the API endpoint
     axios
       .get(
         "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
@@ -49,9 +50,9 @@ const AdminDashboard = () => {
     const value = e.target.value;
     setSearchTerm(value);
     if (value === "") {
-      setUsers(originalUsers.map((user) => ({ ...user, editing: false }))); 
+      setUsers(originalUsers.map((user) => ({ ...user, editing: false }))); // Restore original data when search term is empty
     } else {
-      // handleSearch(value); uncomment this line for dynamic search and remove onkeydown and seach button!!!
+      handleSearch(value);
     }
   };
 
@@ -89,7 +90,10 @@ const AdminDashboard = () => {
 
   const handleDeleteSelected = () => {
     if (selectedRows.length === 0) {
-      const confirmDelete = window.confirm("No records selected !!!");
+      // Show a confirmation popup before proceeding
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete all selected records?"
+      );
       if (!confirmDelete) {
         return;
       }
@@ -106,11 +110,6 @@ const AdminDashboard = () => {
     );
     setUsers(updatedUsers);
   };
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch(searchTerm);
-    }
-  };
 
   return (
     <div>
@@ -118,19 +117,16 @@ const AdminDashboard = () => {
         <input
           className="search"
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
           value={searchTerm}
           onChange={(e) => handleInputChange(e)}
-          onKeyDown={(e) => handleKeyPress(e)}
-          
         />
-        <button className="search-icon" onClick={() => handleSearch(searchTerm)}>
-          <FaSearch/>
-        </button>
-        <button className="del-select" onClick={handleDeleteSelected}>
+         <button className="del-select" onClick={handleDeleteSelected}>
           <FcDeleteDatabase />
         </button>
       </div>
+     
+
 
       <table>
         <thead>
@@ -220,6 +216,8 @@ const AdminDashboard = () => {
       </table>
 
       <div>
+        
+
         <span>
           {selectedRows.length} of {users.length} row(s) selected
         </span>

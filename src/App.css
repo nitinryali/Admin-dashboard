@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+/* Reset some default styles */
+body, html, div, p, ul, li, h1, h2, h3, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+div.top-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+div.search {
+  flex-grow: -1; 
+}
+
+div.top-bar input[type="text"] {
+  width: 89%;
+  padding: 10px;
+}
+
+button.delete-selected {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f44336;
+  color: rgb(220, 113, 113);
+}
+
+
+div {
+  font-family: 'Arial', sans-serif;
+  padding: 15px;
+  position: relative; 
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 11px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: none; 
+  padding: 8px;
+  text-align: left;
+}
+.del-select{
+  margin-left:0%;
+  margin-right: 3%;
+
+}
+th {
+  background-color: #f2f2f2;
+}
+
+tr.selected {
+  background-color: #ddd;
+}
+
+button {
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 5px;
+}
+
+button.edit {
+  background-color: #4CAF50;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+button.delete {
+  background-color: #f44336;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+button.save {
+  background-color: #008CBA;
+  color: white;
+}
+
+.pages {
+  padding: 5px;
+  margin-right: 5px;
+  top: 5px;
+}
+
+.pages {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px; 
+}
+
+@media (max-width: 768px) {
+  th, td {
+    display: block;
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  td input {
+    width: 100%;
   }
 }
